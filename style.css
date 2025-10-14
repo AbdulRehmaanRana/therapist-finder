@@ -1,0 +1,118 @@
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --primary-color: #0D6EFD;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0,0,0,0.05);
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f7f9fc;
+  color: #222;
+}
+
+.app-header h1 {
+  color: #1e3a8a; /* calm blue tone */
+  font-weight: 700;
+}
+
+.filters-container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+.filter-group select, #search-bar {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+}
+#clear-filters {
+  margin-top: 15px;
+  background: #fb7185;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+  display: block;
+  margin: 20px auto 0;
+
+
+}
+
+#clear-filters:hover {
+  background: #e11d48;
+}
+
+
+#results-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.therapist-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.therapist-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+.therapist-card h3 {
+  font-size: 1.2rem;
+  color: #0d47a1;
+  margin-bottom: 8px;
+}
+.therapist-card .info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+.therapist-card .tags {
+  margin: 6px 0;
+}
+.therapist-card .tags span {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+.view-details-btn {
+  display: inline-block;
+  margin-top: 8px;
+  background: #2563eb;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.view-details-btn:hover {
+  background: #1d4ed8;
+}
+@media (max-width: 700px) {
+  #results-container {
+    grid-template-columns: 1fr;
+  }
+  .filters-container {
+    flex-direction: column;
+  }
+  .therapist-card {
+    padding: 15px;
+  }
+}
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Therapist Finder</title>
+  <link href="style.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="app-container">
+    <header class="app-header">
+      <h1>Find Your Therapist</h1>
+      <p>Search for verified mental health professionals in Pakistan.</p>
+    </header>
+
+    <section class="filters-container">
+  <input type="text" id="search-bar" placeholder="Search by name, expertise, or education...">
+
+  <div class="filter-group">
+    <select id="city-filter">
+      <option value="">All Cities</option>
+    </select>
+    <select id="gender-filter">
+      <option value="">Any Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <select id="experience-filter">
+      <option value="">All Experience Levels</option>
+      <option value="0-5">0–5 years</option>
+      <option value="5-10">5–10 years</option>
+      <option value="10-15">10–15 years</option>
+      <option value="15+">15+ years</option>
+    </select>
+
+    <select id="fee-filter">
+      <option value="">All Fee Ranges</option>
+      <option value="under-2000">Under Rs. 2,000</option>
+      <option value="2000-4000">Rs. 2,000 – 4,000</option>
+      <option value="4000-6000">Rs. 4,000 – 6,000</option>
+      <option value="above-6000">Above Rs. 6,000</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <select id="mode-filter">
+      <option value="">All Consultation Modes</option>
+      <option value="In-person">In-person</option>
+      <option value="Online">Online</option>
+      <option value="Both">Both</option>
+    </select>
+  </div>
+
+  <button id="clear-filters">Clear All Filters</button>
+</section>
+
+    <div class="actions-bar">
+  
+</div>
+
+
+    <section id="results-container"></section>
+  </main>
+
+  <!-- ✅ Load PapaParse first -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+  <!-- ✅ Then load your custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>
