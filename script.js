@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const modeFilter = document.getElementById("mode-filter");
   const resultsContainer = document.getElementById("results-container");
 
-  let allTherapists = []; // holds all parsed CSV data
+  let allTherapists = [];
 
   // ✅ Load and parse the CSV file
-  Papa.parse("therapists.csv", {
+  Papa.parse("./therapists.csv", {
     download: true,
     header: true,
     complete: function (results) {
@@ -155,8 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <a class="view-details-btn" href="${person.profile_url}" target="_blank">View Details</a>
       `;
-
       resultsContainer.appendChild(card);
+    });
+  }
+
+  // 🌙 Theme toggle logic
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      themeToggle.textContent = document.body.classList.contains("dark")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
     });
   }
 });

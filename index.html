@@ -4,74 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Therapist Finder</title>
+
+  <!-- 🌐 Fonts & Icons -->
   <link href="style.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- 🧠 Branding & SEO -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4305/4305690.png" />
+  <meta name="description" content="Find verified mental health professionals across Pakistan — MindCare Therapist Finder.">
+  <meta property="og:title" content="MindCare Pakistan — Therapist Finder">
+  <meta property="og:description" content="Search, filter, and connect with certified therapists near you.">
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4305/4305690.png">
 </head>
+
 <body>
   <main class="app-container">
     <header class="app-header">
       <h1>Find Your Therapist</h1>
       <p>Search for verified mental health professionals in Pakistan.</p>
+      <button id="theme-toggle">🌙 Dark Mode</button>
     </header>
 
-    <section class="filters-container">
-  <input type="text" id="search-bar" placeholder="Search by name, expertise, or education...">
+    <!-- 🧭 Filters Section -->
+    <div class="main-content">
+      <aside class="filters-container">
+        <input type="text" id="search-bar" placeholder="Search by name, expertise, or education..." />
 
-  <div class="filter-group">
-    <select id="city-filter">
-      <option value="">All Cities</option>
-    </select>
-    <select id="gender-filter">
-      <option value="">Any Gender</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-  </div>
+        <div class="filter-group">
+          <select id="city-filter">
+            <option value="">All Cities</option>
+          </select>
 
-  <div class="filter-group">
-    <select id="experience-filter">
-      <option value="">All Experience Levels</option>
-      <option value="0-5">0–5 years</option>
-      <option value="5-10">5–10 years</option>
-      <option value="10-15">10–15 years</option>
-      <option value="15+">15+ years</option>
-    </select>
+          <select id="gender-filter">
+            <option value="">Any Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
 
-    <select id="fee-filter">
-      <option value="">All Fee Ranges</option>
-      <option value="under-2000">Under Rs. 2,000</option>
-      <option value="2000-4000">Rs. 2,000 – 4,000</option>
-      <option value="4000-6000">Rs. 4,000 – 6,000</option>
-      <option value="above-6000">Above Rs. 6,000</option>
-    </select>
-  </div>
+        <div class="filter-group">
+          <select id="experience-filter">
+            <option value="">All Experience Levels</option>
+            <option value="0-5">0–5 years</option>
+            <option value="5-10">5–10 years</option>
+            <option value="10-15">10–15 years</option>
+            <option value="15+">15+ years</option>
+          </select>
 
-  <div class="filter-group">
-    <select id="mode-filter">
-      <option value="">All Consultation Modes</option>
-      <option value="In-person">In-person</option>
-      <option value="Online">Online</option>
-      <option value="Both">Both</option>
-    </select>
-  </div>
+          <select id="fee-filter">
+            <option value="">All Fee Ranges</option>
+            <option value="under-2000">Under Rs. 2,000</option>
+            <option value="2000-4000">Rs. 2,000 – 4,000</option>
+            <option value="4000-6000">Rs. 4,000 – 6,000</option>
+            <option value="above-6000">Above Rs. 6,000</option>
+          </select>
+        </div>
 
-  <button id="clear-filters">Clear All Filters</button>
-</section>
+        <div class="filter-group">
+          <select id="mode-filter">
+            <option value="">All Consultation Modes</option>
+            <option value="In-person">In-person</option>
+            <option value="Online">Online</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
 
-    <div class="actions-bar">
-  
-</div>
+        <button id="clear-filters">Clear All Filters</button>
+      </aside>
 
+      <!-- 💼 Results Section -->
+      <section id="results-container"></section>
+    </div>
 
-    <section id="results-container"></section>
+    <footer class="app-footer">
+      <p>© 2025 MindCare Pakistan — All Rights Reserved</p>
+    </footer>
   </main>
 
-  <!-- ✅ Load PapaParse first -->
+  <!-- 📦 External Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
-  <!-- ✅ Then load your custom JS -->
+  <!-- 💡 Custom Script -->
   <script src="script.js"></script>
 </body>
 </html>
