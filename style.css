@@ -1,18 +1,24 @@
-/* 🌿 Root variables */
+/* 🌿 Theme Variables */
 :root {
-  --bg-color: #f7f9fc;
-  --text-color: #212529;
-  --primary-color: #0d6efd;
-  --border-color: #dee2e6;
-  --card-bg: #ffffff;
-  --shadow-color: rgba(0, 0, 0, 0.05);
+  --bg-light: #f7f9fc;
+  --bg-dark: #111827;
+  --text-light: #212529;
+  --text-dark: #f9fafb;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent: #fb7185;
+  --accent-hover: #e11d48;
+  --card-light: #ffffff;
+  --card-dark: #1f2937;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-dark: rgba(255, 255, 255, 0.05);
 }
 
-/* 🌍 Global Styles */
+/* 🌍 Base Styles */
 body {
   font-family: "Inter", sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
+  background: var(--bg-light);
+  color: var(--text-light);
   margin: 0;
   padding: 20px;
   transition: background 0.3s, color 0.3s;
@@ -23,57 +29,51 @@ body {
   text-align: center;
   margin-bottom: 30px;
 }
-
 .app-header h1 {
   color: #1e3a8a;
   font-weight: 700;
   margin-bottom: 6px;
 }
-
 .app-header p {
   color: #555;
   font-size: 1rem;
   margin-bottom: 10px;
 }
 
-/* 🧭 Filters Section */
+/* 🧭 Filters */
 .main-content {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 25px;
 }
-
 .filters-container {
-  background: #ffffff;
+  background: var(--card-light);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px var(--shadow-light);
   height: fit-content;
 }
-
 .filter-group {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 15px;
-  flex-wrap: wrap;
 }
-
 #search-bar,
 .filter-group select {
   width: 100%;
   border: 1px solid #ccc;
-  box-sizing: border-box;
   border-radius: 8px;
   padding: 10px;
   font-size: 1rem;
-  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* 🔘 Clear Filters Button */
+/* 🔘 Clear Filters */
 #clear-filters {
   margin-top: 15px;
-  background: #fb7185;
-  color: white;
+  background: var(--accent);
+  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 10px 15px;
@@ -82,37 +82,32 @@ body {
   transition: background 0.3s;
   width: 100%;
 }
-
 #clear-filters:hover {
-  background: #e11d48;
+  background: var(--accent-hover);
 }
 
-/* 🧩 Results Grid */
+/* 🧩 Therapist Cards */
 #results-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 25px;
 }
-
 .therapist-card {
-  background: var(--card-bg);
+  background: var(--card-light);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
 .therapist-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
-
 .therapist-card h3 {
   font-size: 1.2rem;
   color: #0d47a1;
   margin-bottom: 8px;
 }
-
 .therapist-card .info {
   display: flex;
   justify-content: space-between;
@@ -120,11 +115,6 @@ body {
   color: #555;
   margin-bottom: 8px;
 }
-
-.therapist-card .tags {
-  margin: 6px 0;
-}
-
 .therapist-card .tags span {
   background: #e0f2fe;
   color: #0369a1;
@@ -134,12 +124,11 @@ body {
   margin-right: 5px;
   display: inline-block;
 }
-
 .view-details-btn {
   display: inline-block;
   margin-top: 8px;
-  background: #2563eb;
-  color: white;
+  background: var(--primary);
+  color: #fff;
   padding: 8px 12px;
   border-radius: 6px;
   text-decoration: none;
@@ -147,7 +136,7 @@ body {
   transition: background 0.3s ease;
 }
 .view-details-btn:hover {
-  background: #1d4ed8;
+  background: var(--primary-hover);
 }
 
 /* 📱 Responsive */
@@ -161,55 +150,49 @@ body {
   #results-container {
     grid-template-columns: 1fr;
   }
-  #search-bar {
-    width: 100%;
-  }
 }
 
-/* 🌙 DARK MODE THEME */
+/* 🌗 Dark Mode */
 body.dark {
-  background-color: #111827;
-  color: #f9fafb;
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
-
-body.dark .filters-container {
-  background-color: #1f2937;
-  color: #f9fafb;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-}
-
+body.dark .filters-container,
 body.dark .therapist-card {
-  background-color: #1f2937;
+  background: var(--card-dark);
+  box-shadow: 0 4px 8px var(--shadow-dark);
   border-color: #374151;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
 }
-
 body.dark .therapist-card h3 {
   color: #38bdf8;
 }
-
-body.dark .view-details-btn {
-  background: #2563eb;
+body.dark .therapist-card .info {
+  color: #e5e7eb;
 }
-
-body.dark .view-details-btn:hover {
-  background: #1d4ed8;
+body.dark .therapist-card .tags span {
+  background: #334155;
+  color: #bae6fd;
 }
-
 body.dark select,
 body.dark #search-bar {
-  background-color: #1f2937;
-  color: #f9fafb;
+  background: var(--card-dark);
+  color: var(--text-dark);
   border: 1px solid #374151;
 }
+body.dark .view-details-btn {
+  background: var(--primary);
+}
+body.dark .view-details-btn:hover {
+  background: var(--primary-hover);
+}
 
-/* 🌗 Floating Theme Toggle (always visible) */
+/* 🌙 Floating Theme Toggle */
 #theme-toggle {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 1000;
-  background: #2563eb;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -220,31 +203,14 @@ body.dark #search-bar {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   font-size: 0.95rem;
 }
-
 #theme-toggle:hover {
-  background: #1d4ed8;
+  background: var(--primary-hover);
 }
-
-/* 🌙 Dark Mode Toggle Style */
 body.dark #theme-toggle {
   background: #38bdf8;
   color: #0f172a;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
-
 body.dark #theme-toggle:hover {
   background: #0ea5e9;
-}
-/* ✨ Improve readability in Dark Mode */
-body.dark .therapist-card .info {
-  color: #d1d5db !important; /* ensure visible on dark background */
-}
-
-body.dark .therapist-card .tags span {
-  background: #334155 !important; /* subtle bluish gray background */
-  color: #e0f2fe !important; /* light cyan text for visibility */
-}
-
-body.dark .therapist-card h3 {
-  color: #38bdf8 !important; /* keep headings bright */
 }

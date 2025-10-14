@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // 🧩 Get DOM elements
   const searchBar = document.getElementById("search-bar");
   const cityFilter = document.getElementById("city-filter");
   const genderFilter = document.getElementById("gender-filter");
@@ -6,17 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const feeFilter = document.getElementById("fee-filter");
   const modeFilter = document.getElementById("mode-filter");
   const resultsContainer = document.getElementById("results-container");
+  const clearFiltersBtn = document.getElementById("clear-filters");
+  const themeToggle = document.getElementById("theme-toggle");
 
   let allTherapists = [];
 
-  // ✅ Load and parse the CSV file
+  // ✅ Load and parse the CSV file using PapaParse
   Papa.parse("./therapists.csv", {
     download: true,
     header: true,
     complete: function (results) {
-      allTherapists = results.data.filter(row => row.name && row.name.trim() !== "");
+      allTherapists = results.data.filter(t => t.name && t.name.trim() !== "");
 
-      // 🏙️ Populate city dropdown dynamically
+      // 🏙️ Populate city dropdown dynamically (sorted unique)
       const cities = [...new Set(allTherapists.map(t => t.city).filter(Boolean))].sort();
       cities.forEach(city => {
         const option = document.createElement("option");
@@ -33,28 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 
-  // 🧭 Apply filters whenever something changes
-  searchBar.addEventListener("input", applyFilters);
-  cityFilter.addEventListener("change", applyFilters);
-  genderFilter.addEventListener("change", applyFilters);
-  experienceFilter.addEventListener("change", applyFilters);
-  feeFilter.addEventListener("change", applyFilters);
-  modeFilter.addEventListener("change", applyFilters);
+  // 🧭 Add event listeners for all filters
+  [searchBar, cityFilter, genderFilter, experienceFilter, feeFilter, modeFilter]
+    .forEach(el => el.addEventListener("input", applyFilters));
 
-  // 🧹 Clear all filters
-  document.getElementById("clear-filters").addEventListener("click", () => {
-    searchBar.value = "";
-    cityFilter.value = "";
-    genderFilter.value = "";
-    experienceFilter.value = "";
-    feeFilter.value = "";
-    modeFilter.value = "";
+  // 🧹 Clear all filters and reset list
+  clearFiltersBtn.addEventListener("click", () => {
+    [searchBar, cityFilter, genderFilter, experienceFilter, feeFilter, modeFilter]
+      .forEach(el => el.value = "");
     renderTherapists(allTherapists);
   });
 
-  // 🔍 Filtering logic
+  // 🔍 Apply all filters together
   function applyFilters() {
-    let filteredTherapists = allTherapists;
     const searchTerm = searchBar.value.toLowerCase();
     const selectedCity = cityFilter.value;
     const selectedGender = genderFilter.value;
@@ -62,7 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedFee = feeFilter.value;
     const selectedMode = modeFilter.value;
 
-    // 🔍 Search filter
+    let filteredTherapists = [...allTherapists];
+
+    // 🔍 Search filter (name, expertise, education)
     if (searchTerm) {
       filteredTherapists = filteredTherapists.filter(t =>
         (t.name || "").toLowerCase().includes(searchTerm) ||
@@ -72,24 +68,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 🌆 City filter
-    if (selectedCity) {
+    if (selectedCity)
       filteredTherapists = filteredTherapists.filter(t => t.city === selectedCity);
-    }
 
     // 👩‍⚕️ Gender filter
-    if (selectedGender) {
+    if (selectedGender)
       filteredTherapists = filteredTherapists.filter(t => t.gender === selectedGender);
-    }
 
     // 🧮 Experience filter
     if (selectedExperience) {
       filteredTherapists = filteredTherapists.filter(t => {
         const years = parseFloat(t.experience_years) || 0;
-        if (selectedExperience === "0-5") return years <= 5;
-        if (selectedExperience === "5-10") return years > 5 && years <= 10;
-        if (selectedExperience === "10-15") return years > 10 && years <= 15;
-        if (selectedExperience === "15+") return years > 15;
-        return true;
+        return (
+          (selectedExperience === "0-5" && years <= 5) ||
+          (selectedExperience === "5-10" && years > 5 && years <= 10) ||
+          (selectedExperience === "10-15" && years > 10 && years <= 15) ||
+          (selectedExperience === "15+" && years > 15)
+        );
       });
     }
 
@@ -97,29 +92,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedFee) {
       filteredTherapists = filteredTherapists.filter(t => {
         const fee = parseFloat(t.fee_amount) || 0;
-        if (selectedFee === "under-2000") return fee < 2000;
-        if (selectedFee === "2000-4000") return fee >= 2000 && fee <= 4000;
-        if (selectedFee === "4000-6000") return fee > 4000 && fee <= 6000;
-        if (selectedFee === "above-6000") return fee > 6000;
-        return true;
+        return (
+          (selectedFee === "under-2000" && fee < 2000) ||
+          (selectedFee === "2000-4000" && fee >= 2000 && fee <= 4000) ||
+          (selectedFee === "4000-6000" && fee > 4000 && fee <= 6000) ||
+          (selectedFee === "above-6000" && fee > 6000)
+        );
       });
     }
 
-    // 💬 Consultation Mode filter
+    // 💬 Mode filter
     if (selectedMode) {
       filteredTherapists = filteredTherapists.filter(t => {
         const modes = (t.modes || "").toLowerCase();
-        if (selectedMode === "In-person") return modes.includes("in-person");
-        if (selectedMode === "Online") return modes.includes("online");
-        if (selectedMode === "Both") return modes.includes("in-person") && modes.includes("online");
-        return true;
+        return (
+          (selectedMode === "In-person" && modes.includes("in-person")) ||
+          (selectedMode === "Online" && modes.includes("online")) ||
+          (selectedMode === "Both" && modes.includes("in-person") && modes.includes("online"))
+        );
       });
     }
 
     renderTherapists(filteredTherapists);
   }
 
-  // 🎴 Display therapists
+  // 🎴 Render therapist cards
   function renderTherapists(list) {
     resultsContainer.innerHTML = "";
 
@@ -153,20 +150,29 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(tag => `<span>${tag.trim()}</span>`)
             .join("")}
         </div>
-        <a class="view-details-btn" href="${person.profile_url}" target="_blank">View Details</a>
+        ${
+          person.profile_url
+            ? `<a class="view-details-btn" href="${person.profile_url}" target="_blank">View Details</a>`
+            : ""
+        }
       `;
       resultsContainer.appendChild(card);
     });
   }
 
-  // 🌙 Theme toggle logic
-  const themeToggle = document.getElementById("theme-toggle");
+  // 🌙 Dark / Light Theme Toggle
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark");
-      themeToggle.textContent = document.body.classList.contains("dark")
-        ? "☀️ Light Mode"
-        : "🌙 Dark Mode";
+      const darkMode = document.body.classList.contains("dark");
+      themeToggle.textContent = darkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem("theme", darkMode ? "dark" : "light");
     });
+
+    // Load saved theme preference
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+      themeToggle.textContent = "☀️ Light Mode";
+    }
   }
 });
