@@ -36,8 +36,6 @@ body {
   margin-bottom: 10px;
 }
 
-
-
 /* 🧭 Filters Section */
 .main-content {
   display: grid;
@@ -66,10 +64,12 @@ body {
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 8px;
-  padding: 12px;
+  padding: 10px;
   font-size: 1rem;
+  max-width: 100%;
 }
 
+/* 🔘 Clear Filters Button */
 #clear-filters {
   margin-top: 15px;
   background: #fb7185;
@@ -82,6 +82,7 @@ body {
   transition: background 0.3s;
   width: 100%;
 }
+
 #clear-filters:hover {
   background: #e11d48;
 }
@@ -160,6 +161,9 @@ body {
   #results-container {
     grid-template-columns: 1fr;
   }
+  #search-bar {
+    width: 100%;
+  }
 }
 
 /* 🌙 DARK MODE THEME */
@@ -187,15 +191,9 @@ body.dark .therapist-card h3 {
 body.dark .view-details-btn {
   background: #2563eb;
 }
+
 body.dark .view-details-btn:hover {
   background: #1d4ed8;
-}
-
-body.dark #theme-toggle {
-  background: #2563eb;
-}
-body.dark #theme-toggle:hover {
-  background: #1e40af;
 }
 
 body.dark select,
@@ -204,12 +202,13 @@ body.dark #search-bar {
   color: #f9fafb;
   border: 1px solid #374151;
 }
+
 /* 🌗 Floating Theme Toggle (always visible) */
 #theme-toggle {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 999;
+  z-index: 1000;
   background: #2563eb;
   color: #fff;
   border: none;
@@ -232,6 +231,20 @@ body.dark #theme-toggle {
   color: #0f172a;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
+
 body.dark #theme-toggle:hover {
   background: #0ea5e9;
+}
+/* ✨ Improve readability in Dark Mode */
+body.dark .therapist-card .info {
+  color: #d1d5db !important; /* ensure visible on dark background */
+}
+
+body.dark .therapist-card .tags span {
+  background: #334155 !important; /* subtle bluish gray background */
+  color: #e0f2fe !important; /* light cyan text for visibility */
+}
+
+body.dark .therapist-card h3 {
+  color: #38bdf8 !important; /* keep headings bright */
 }
